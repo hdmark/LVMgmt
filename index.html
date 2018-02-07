@@ -9,30 +9,13 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-bar-demo" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      	</button>
-			<a href="./index" class="navbar-brand"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Home</a>
-		</div>
-		
-		<div class="collapse navbar-collapse" id="nav-bar-demo">
-			<ul class="nav navbar-nav">
-				<li><a href="./Dad/DadsLink">Dad</a></li>
-				<!-- <li><a href="#">Contact Us</a></li> -->
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<!-- <li><a href="#">Sign Up</a></li>
-				<li><a href="#">Login</a></li> -->
-			</ul>
-		</div>
-	</div>	
-</nav>
+<!-- Nav Section -->
+<div id="nav-placeholder"></div>
+<script>
+	$(function(){
+	  $("#nav-placeholder").load("nav.html");
+	});
+</script>
 
 
 <div class="container">
