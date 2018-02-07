@@ -8,7 +8,7 @@ function getProfitShowValue(val){
 		d.setAttribute("id","profitOne");
 
 		var h = document.createElement("h1");                // Create a <h1> element
-		var t = document.createTextNode("hahaha were broke");     // Create a text node
+		var t = document.createTextNode("gains - 0 : losses - way more than the gains");     // Create a text node
 		h.appendChild(t);
 		d.appendChild(h)
 		document.body.appendChild(d);
