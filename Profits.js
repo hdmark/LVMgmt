@@ -1,52 +1,54 @@
 function getProfitShowValue(val){
 	var radios = document.getElementsByName('optProfitShow');
 	
-	// console.log("hi");
 	if(val=="Yes"){
-		console.log(val);
-		var d = document.createElement("div");
-		d.setAttribute("class","container");
-		d.setAttribute("id","profitOne");
 
-		var h = document.createElement("h1");                // Create a <h1> element
-		var t = document.createTextNode("vertcoin: " + 7.50 - " - 0 : losses - way more than the gains");     // Create a text node
-		h.appendChild(t);
-		d.appendChild(h)
-		document.body.appendChild(d);
 
-		
-		
+		addProfitDiv("vertcoin","profitOne", 7.50, 200);
+		addProfitDiv("dogecoin","profitTwo", .01, 25);
+				// $.getJSON("https://api.coinmarketcap.com/v1/ticker/vertcoin/", function(data){
+
+		// 	//-----------------------------------------------------------
+		// 	//DATA EVALUATION 
+		// 	var current = Number(data[0]["price_usd"]);
+
+		// 	console.log(current +100);
+		// 	var diff = 7.50 - current;
+		// 	//-----------------------------------------------------------
+
+
+		// 	//-----------------------------------------------------------
+		// 	// HTML MODIFIERS
+		// 	//create a text element with the data i need to add
+		// 	var h = document.createElement("h1");                // Create a <h1> element
+		// 	var t = document.createTextNode("vertcoin: " + diff );     // Create a text node
+
+		// 	// create div called profit one
+		// 	var d = document.createElement("div");
+		// 	d.setAttribute("class","container");
+		// 	d.setAttribute("id","profitOne");
+
+		// 	// add text element to the div and add it to the file
+		// 	h.appendChild(t);
+		// 	d.appendChild(h)
+		// 	document.body.appendChild(d);
+		// 	//profit = data;
+		// 	})
+		// 	//-----------------------------------------------------------
+
+			
 	}else{
-		console.log(val);
+		//deletes out the h1
 		var element = document.getElementById("profitOne");
 		if(element!= null){
 			element.outerHTML = "";
 		delete element;}
-
-		// var newData = document.createElement("div");
-		// 	newData.setAttribute("id","coin2data");
-		// 	newData.setAttribute('class', 'coinmarketcap-currency-widget');
-		//     newData.setAttribute('data-currency', 'bitcoin');
-		//     newData.setAttribute('data-base', 'USD');
-		//     coin2.appendChild(newData);
-
-	 //    var script = document.createElement("script");
-	 //    	script.setAttribute('type', 'text/javascript');
-		//     script.setAttribute('src', 'https://files.coinmarketcap.com/static/widget/currency.js');
-		//     coin2.appendChild(script);
+		var element = document.getElementById("profitTwo");
+		if(element!= null){
+			element.outerHTML = "";
+		delete element;}
 	}
 	
-	// for (var i = 0, length = radios.length; i < length; i++)
-	// {
-	//  if (radios[i].checked)
-	//  {
-	//   // do whatever you want with the checked radio
-	//   alert(radios[i].value);
-
-	//   // only one radio can be logically checked, don't check the rest
-	//   break;
-	//  }
-	// }
 }
 
 function reDraw(coin){
@@ -71,14 +73,36 @@ function reDraw(coin){
 		// delete coin2data;
 }
 
-function apicall(coin){
+function addProfitDiv(coin,divName, initPrice, initAmt){
+			$.getJSON("https://api.coinmarketcap.com/v1/ticker/" + coin + "/", function(data){
 
-	fetch("https://api.coinmarketcap.com/v1/ticker/"+coin+"/")
-	.then(res => res.json())
-	.then((out) => {
-	  console.log('Checkout this JSON! ', out);
-	  console.log(out["0"]["price_usd"]);
-	})
-	.catch(err => { throw err });
-	 return out["0"]["price_usd"]
-}
+			//-----------------------------------------------------------
+			//DATA EVALUATION 
+			var current = Number(data[0]["price_usd"]);
+			var newAmt = initAmt *  (current/initPrice);
+
+			var success
+			if(initAmt>newAmt){
+				success = "down";}else{sucess="up";};
+			//-----------------------------------------------------------
+
+
+			//-----------------------------------------------------------
+			// HTML MODIFIERS
+			//create a text element with the data i need to add
+			var h = document.createElement("h5");                // Create a <h1> element
+			var t = document.createTextNode(coin +": $" + newAmt + " from $" + initAmt + " which puts us "+ success);     // Create a text node
+
+			// create div called profit one
+			var d = document.createElement("div");
+			d.setAttribute("class","container");
+			d.setAttribute("id",divName);
+
+			// add text element to the div and add it to the file
+			h.appendChild(t);
+			d.appendChild(h)
+			document.body.appendChild(d);
+			//profit = data;
+			})
+			//-----------------------------------------------------------
+		}
